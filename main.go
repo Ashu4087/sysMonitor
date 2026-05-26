@@ -5,13 +5,15 @@ import (
 	"log"
 	"os/user"
 	"sysMonitor/cpu"
+	"sysMonitor/disk"
 	"sysMonitor/vmem"
 )
 
 func PrintMemoryInfo() {
 	memInfo, err := vmem.GetInfo()
 	if err != nil {
-		log.Fatalf("Error fetching memory info: %v", err)
+		log.Printf("Error fetching memory info: %v", err)
+		return
 	}
 
 	fmt.Printf("Total Memory: %.2f GB\n", memInfo.TotalGB)
@@ -23,14 +25,25 @@ func PrintCPUInfo() {
 	// Placeholder for CPU info fetching and printing logic
 	cpuInfo, err := cpu.Fetch()
 	if err != nil {
-		log.Fatalf("Error fetching CPU info: %v", err)
+		log.Printf("Error fetching CPU info: %v", err)
+		return
 	}
 
 	fmt.Printf("CPU Cores: %d\n", cpuInfo.Cores)
 	fmt.Printf("CPU Model: %s\n", cpuInfo.ModelName)
 	fmt.Printf("CPU Usage: %.2f%%\n", cpuInfo.UsagePercent)
 }
+func PrintDiskInfo() {
+	d, error := disk.Fetch()
+	if error != nil {
+		log.Printf("Error fetching disk info: %v", error)
+		return
+	}
 
+	fmt.Printf("Total Disk Space: %.2f GB\n", d.TotalGB)
+	fmt.Printf("Free Disk Space: %.2f GB\n", d.FreeGB)
+	fmt.Printf("Used Percentage: %.2f%%\n", d.UsedPercentage)
+}
 func main() {
 
 	// --- PART 1: User & Nickname Logic ---
@@ -58,4 +71,8 @@ func main() {
 	fmt.Println("===============================")
 	// --- PART 3: CPU Fetch Logic ---
 	PrintCPUInfo()
+
+	fmt.Println("===============================")
+	// --- PART 4: Disk Fetch Logic ---
+	PrintDiskInfo()
 }
