@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os/user"
+	"sync"
 	"sysMonitor/cpu"
 	"sysMonitor/disk"
 	"sysMonitor/vmem"
@@ -64,15 +65,32 @@ func main() {
 	fmt.Printf("\nWelcome %s! Fetching your system details...\n", nickName)
 
 	fmt.Println("===============================")
+	fmt.Println("Fetching system metrics concurrently...")
+	fmt.Println("===============================")
+	var wg sync.WaitGroup
+	wg.Add(3) // Add 3 background tasks to the WaitGroup counter
 
 	// --- PART 2: Memory Fetch Logic ---
-	PrintMemoryInfo()
+	go func() {
+		defer wg.Done() // Mark this task as done when the function exits and counter will be decremented by 1
+		PrintMemoryInfo()
+		fmt.Println("===============================")
+	}()
 
-	fmt.Println("===============================")
 	// --- PART 3: CPU Fetch Logic ---
-	PrintCPUInfo()
+	go func() {
+		defer wg.Done() // Mark this task as done when the function exits and counter will be decremented by 1
+		PrintCPUInfo()
+		fmt.Println("===============================")
+	}()
 
-	fmt.Println("===============================")
 	// --- PART 4: Disk Fetch Logic ---
-	PrintDiskInfo()
+	go func() {
+		defer wg.Done() // Mark this task as done when the function exits and counter will be decremented by 1
+		PrintDiskInfo()
+		fmt.Println("===============================")
+
+	}()
+	wg.Wait() // Wait for all tasks to complete before exiting the program
+	fmt.Print(" All metrics fetched successfully!")
 }
