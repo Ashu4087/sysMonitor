@@ -2,15 +2,9 @@ package vmem
 
 import (
 	"fmt"
+	"sysMonitor/units"
 
 	system_memory "github.com/shirou/gopsutil/v3/mem"
-)
-
-const (
-	B  = 1
-	KB = 1024 * B
-	MB = 1024 * KB
-	GB = 1024 * MB
 )
 
 type MemoryInfo struct {
@@ -25,8 +19,8 @@ func GetInfo() (MemoryInfo, error) {
 		return MemoryInfo{}, fmt.Errorf("error fetching memory: %v", err)
 	}
 	return MemoryInfo{
-		TotalGB:     float64(vm.Total) / float64(GB),
-		FreeGB:      float64(vm.Free) / float64(GB),
+		TotalGB:     float64(vm.Total) / float64(units.GB),
+		FreeGB:      float64(vm.Free) / float64(units.GB),
 		UsedPercent: vm.UsedPercent,
 	}, nil
 }
