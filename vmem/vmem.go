@@ -2,8 +2,8 @@ package vmem
 
 import (
 	"fmt"
-	"sysMonitor/units"
-
+	// "sysMonitor/units"
+	"github.com/Ashu4087/sysMonitor/units"
 	system_memory "github.com/shirou/gopsutil/v3/mem"
 )
 

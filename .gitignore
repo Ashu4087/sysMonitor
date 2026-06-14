@@ -1,0 +1,6 @@
+# Ignore the entire bin folder
+bin/
+build/
+
+# Compiled Windows binaries
+*.exe

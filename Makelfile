@@ -1,0 +1,15 @@
+# Default target
+.PHONY: run build clean
+
+# run the app
+run:
+    go run main.go
+  
+# build the app
+
+build:
+    go build -o bin/sysMonitor main.go
+    
+#clean build
+clean:
+    rm -rf bin/

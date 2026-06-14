@@ -2,7 +2,8 @@ package disk
 
 import (
 	"fmt"
-	"sysMonitor/units"
+	// "sysMonitor/units"
+	"github.com/Ashu4087/sysMonitor/units"
 
 	sys_disk "github.com/shirou/gopsutil/v3/disk"
 )

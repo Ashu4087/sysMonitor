@@ -5,9 +5,13 @@ import (
 	"log"
 	"os/user"
 	"sync"
-	"sysMonitor/cpu"
-	"sysMonitor/disk"
-	"sysMonitor/vmem"
+
+	// "sysMonitor/cpu"
+	// "sysMonitor/disk"
+	// "sysMonitor/vmem"
+	"github.com/Ashu4087/sysMonitor/cpu"
+	"github.com/Ashu4087/sysMonitor/disk"
+	"github.com/Ashu4087/sysMonitor/vmem"
 )
 
 func PrintMemoryInfo() {
