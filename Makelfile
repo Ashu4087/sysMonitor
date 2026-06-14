@@ -1,15 +1,14 @@
 # Default target
 .PHONY: run build clean
 
-# run the app
+# Run the application in development mode
 run:
-    go run main.go
-  
-# build the app
+  go run main.go
 
+# Build the executable and output it to the bin/ directory
 build:
-    go build -o bin/sysMonitor main.go
-    
-#clean build
+  go build -o bin/sysMonitor main.go
+
+# Clean the build directory
 clean:
-    rm -rf bin/
+  rm -rf bin/
